@@ -1,0 +1,38 @@
+name: node-exporter
+summary: Exporter for machine metrics.
+description: |
+  Prometheus exporter for hardware and OS metrics exposed by *NIX kernels,
+  written in Go with pluggable metric collectors.
+license: Apache-2.0
+confinement: strict
+base: core18
+adopt-info: node-exporter
+
+parts:
+  node-exporter:
+    plugin: go
+    go-importpath: github.com/prometheus/node_exporter
+    source: https://github.com/prometheus/node_exporter.git
+    source-type: git
+    build-packages:
+      - gcc
+    override-pull: |
+        snapcraftctl pull
+        last_committed_tag="$(git describe --abbrev=0 --tags)"
+        git fetch
+        git checkout "${last_committed_tag}"
+        [ -n "$(echo ${last_committed_tag} | grep "-")" ] && grade=devel || grade=stable
+        snapcraftctl set-version "${last_committed_tag}"
+        snapcraftctl set-grade "$grade"
+apps:
+  node-exporter:
+    command: bin/node_exporter
+    daemon: simple
+    # need systemd activation support
+    # https://github.com/prometheus/node_exporter/issues/1622
+    # sockets: 
+    #   web:
+    #     listen-stream: "[::]:9100"
+    plugs:
+    - network-bind
+    - time-control
