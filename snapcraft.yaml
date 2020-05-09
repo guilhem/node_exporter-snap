@@ -36,3 +36,7 @@ apps:
     plugs:
     - network-bind
     - time-control
+    - hardware-observe
+    - mount-observe
+    - network-observe
+    - system-observe
