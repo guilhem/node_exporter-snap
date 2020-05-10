@@ -14,3 +14,14 @@ snap connect node-exporter:mount-observe
 snap connect node-exporter:network-observe
 snap connect node-exporter:system-observe
 ```
+
+## Configuration
+
+Collectors can be enabled/disabled using the `collectors` and `no-collectors` configuration options with this snap. To specify multiple collectors, use a quoted string with space-separated values. For example:
+
+```bash
+snap set node-exporter collectors=ntp
+snap set node-exporter no-collectors="mdadm netstat"
+```
+
+Reference the [prometheus/node_exporter README.md](https://github.com/prometheus/node_exporter/blob/master/README.md#collectors) for the list of collectors enabled by default.
