@@ -26,7 +26,7 @@ parts:
         snapcraftctl set-grade "$grade"
 apps:
   node-exporter:
-    command: bin/node_exporter
+    command: bin/node_exporter $(cat $SNAP_DATA/flags)
     daemon: simple
     # need systemd activation support
     # https://github.com/prometheus/node_exporter/issues/1622
