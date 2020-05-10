@@ -25,6 +25,7 @@ snap set node-exporter no-collectors="mdadm netstat"
 ```
 
 Reference the [prometheus/node_exporter README.md](https://github.com/prometheus/node_exporter/blob/master/README.md#collectors) for the list of collectors enabled by default.
+
 ## Contributors :sparkles:
 <table>
 <tr>
@@ -43,4 +44,3 @@ Reference the [prometheus/node_exporter README.md](https://github.com/prometheus
                     </a>
                 </td></tr>
 </table>
-
